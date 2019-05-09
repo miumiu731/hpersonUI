@@ -4,21 +4,23 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="dataForm.name" placeholder="名称"></el-input>
+      <el-form-item label="附件名" prop="name">
+        <el-input v-model="dataForm.name" placeholder="附件名"></el-input>
       </el-form-item>
+      <!--
       <el-form-item label="路径" prop="path">
         <el-input v-model="dataForm.path" placeholder="路径"></el-input>
       </el-form-item>
-      <el-form-item label="图片大小" prop="size">
-        <el-input v-model="dataForm.size" placeholder="图片大小"></el-input>
+      <el-form-item label="大小" prop="size">
+        <el-input v-model="dataForm.size" placeholder="大小"></el-input>
       </el-form-item>
-      <el-form-item label="版本号" prop="version">
-        <el-input v-model="dataForm.version" placeholder="版本号"></el-input>
+      <el-form-item label="版本" prop="version">
+        <el-input v-model="dataForm.version" placeholder="版本"></el-input>
       </el-form-item>
-      <el-form-item label="最新更新时间" prop="lastAccess">
-        <el-input v-model="dataForm.lastAccess" placeholder="最新更新时间"></el-input>
+      <el-form-item label="上次执行时间" prop="lastAccess">
+        <el-input v-model="dataForm.lastAccess" placeholder="上次执行时间"></el-input>
       </el-form-item>
+      -->
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
