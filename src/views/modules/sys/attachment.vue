@@ -23,7 +23,6 @@
       //<el-table-column @cell-click="test ()"
       //  prop="chanNo"
       //  header-align="center"
-      //  align="left"
       //  width="111"
       //  label="频道编码">
       //</el-table-column>
