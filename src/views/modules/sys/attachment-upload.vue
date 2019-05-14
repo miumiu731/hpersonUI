@@ -41,7 +41,7 @@
         this.url = this.$http.BASE_URL + `/sys/attachment/uploadAttach?token=${this.$cookie.get('token')}`
         this.visible = true
       },
-      // 上传之前
+      
       beforeUploadHandle (file) {
         if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
           this.$message.error('只支持jpg、png、gif格式的图片！')

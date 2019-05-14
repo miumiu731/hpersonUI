@@ -23,7 +23,6 @@
       //<el-table-column @cell-click="test ()"
       //  prop="chanNo"
       //  header-align="center"
-      //  align="left"
       //  width="111"
       //  label="频道编码">
       //</el-table-column>
@@ -196,7 +195,8 @@
         })
       },
       showImg (url) {
-        this.$alert(`<img src="http://106.12.16.45/${url}" width=400 height=300>`, '', {
+        debugger
+        this.$alert(`<img src="http://106.12.16.45/${url}" width=600 height=500>`, '', {
           dangerouslyUseHTMLString: true,
           confirmButtonText: '关闭',
           callback: action => {

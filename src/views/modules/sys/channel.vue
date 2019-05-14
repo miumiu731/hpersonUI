@@ -95,7 +95,7 @@
       this.getDataList()
     },
     methods: {
-      // 获取数据列表
+      
       getDataList () {
         this.$http({
           url: '/sys/channel/list',
