@@ -102,7 +102,7 @@
       </el-table-column>
     </el-table>
     <!--images="images" -->
-    <viewer style="height: 300px;" v-if= "isshow">
+    <viewer style="height: 300px;" v-show= "isshow">
       <img  v-for="item in imagesArray" :src="item.src" :key="item.index"  height="100">
     </viewer>
 
@@ -132,8 +132,8 @@
   import 'viewerjs/dist/viewer.css'
   Vue.use(Viewer);
   Viewer.setDefaults({
-    'inline':false,//使用了false，可手动关闭
-    'button':true, //右上角按钮
+    "inline": true,//使用了false，可手动关闭
+    "button": true, //右上角按钮
     "navbar": true, //底部缩略图
     "title": true, //当前图片标题
     "toolbar": true, //底部工具栏
@@ -145,6 +145,7 @@
     "transition": true, //使用 CSS3 过度
     "fullscreen": true, //播放时是否全屏
     "keyboard": true, //是否支持键盘
+	"zIndexInline": 9999,
     "url": "data-source",
     ready: function (e) {
       console.log(e.type,'组件以初始化');
