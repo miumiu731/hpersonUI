@@ -101,7 +101,8 @@
         </template>
       </el-table-column>
     </el-table>
-    <viewer images="images" style="height: 300px;" v-if= "isshow">
+    <!--images="images" -->
+    <viewer style="height: 300px;" v-if= "isshow">
       <img  v-for="item in imagesArray" :src="item.src" :key="item.index"  height="100">
     </viewer>
 
