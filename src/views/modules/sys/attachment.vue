@@ -12,6 +12,8 @@
       </el-form-item>
     </el-form>
 
+
+
     <el-table
       :data="channelDataList"
       border
@@ -88,13 +90,21 @@
         align="center"
         width="150"
         label="操作">
+
+
+
         <template slot-scope="scope">
+
           <el-button type="text" size="small" @click="showImg(scope.row.path)">预览</el-button>
           <el-button v-if="isAuth('sys:attachment:update')" type="text" size="small" @click="addOrUpdateHandle(scope.row.id)">修改</el-button>
           <el-button v-if="isAuth('sys:attachment:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <viewer images="images" style="height: 300px;" v-if= "isshow">
+      <img  v-for="item in imagesArray" :src="item.src" :key="item.index"  height="100">
+    </viewer>
+
     <el-pagination
       @size-change="sizeChangeHandle"
       @current-change="currentChangeHandle"
@@ -116,6 +126,53 @@
   import TableTreeColumn from '@/components/table-tree-column'
   import AddOrUpdate from './attachment-add-or-update'
   import Upload from './attachment-upload'
+  import Vue from 'vue';
+  import Viewer from 'v-viewer'
+  import 'viewerjs/dist/viewer.css'
+  Vue.use(Viewer);
+  Viewer.setDefaults({
+    'inline':false,//使用了false，可手动关闭
+    'button':true, //右上角按钮
+    "navbar": true, //底部缩略图
+    "title": true, //当前图片标题
+    "toolbar": true, //底部工具栏
+    "tooltip": true, //显示缩放百分比
+    "movable": true, //是否可以移动
+    "zoomable": true, //是否可以缩放
+    "rotatable": true, //是否可旋转
+    "scalable": true, //是否可翻转
+    "transition": true, //使用 CSS3 过度
+    "fullscreen": true, //播放时是否全屏
+    "keyboard": true, //是否支持键盘
+    "url": "data-source",
+    ready: function (e) {
+      console.log(e.type,'组件以初始化');
+    },
+    show: function (e) {
+      console.log(e.type,'图片显示开始');
+    },
+    shown: function (e) {
+      console.log(e.type,'图片显示结束');
+    },
+    hide: function (e) {
+      console.log(e.type,'图片隐藏完成');
+    },
+    hidden: function (e) {
+      console.log(e.type,'图片隐藏结束');
+    },
+    view: function (e) {
+      console.log(e.type,'视图开始');
+    },
+    viewed: function (e) {
+      console.log(e.type,'视图结束');
+    },
+    zoom: function (e) {
+      console.log(e.type,'图片缩放开始');
+    },
+    zoomed: function (e) {
+      console.log(e.type,'图片缩放结束');
+    }
+  });
 
   export default {
     data () {
@@ -131,7 +188,11 @@
         chanNo: '01',
         dataListSelections: [],
         addOrUpdateVisible: false,
-        uploadVisible: false
+        uploadVisible: false,
+        imagesArray:[
+          {src:'',index:1}
+        ],
+        isshow:false
       }
     },
     components: {
@@ -196,13 +257,15 @@
         })
       },
       showImg (url) {
-        this.$alert(`<img src="http://106.12.16.45/${url}" width=400 height=300>`, '', {
+          this.isshow=true;
+          this.imagesArray=[{src:'http://106.12.16.45/'+url,index:1}];
+        /*this.$alert(`<img src="http://106.12.16.45/${url}" width=400 height=300>`, '', {
           dangerouslyUseHTMLString: true,
           confirmButtonText: '关闭',
           callback: action => {
 
           }
-        })
+        })*/
       },
       // 每页数
       sizeChangeHandle (val) {
