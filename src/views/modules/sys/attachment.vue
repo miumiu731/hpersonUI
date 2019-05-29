@@ -161,7 +161,7 @@
       },
       handleCurrentChange (val) {
         this.currentRow = val
-        alert(this.currentRow['chanNo'])
+        //alert(this.currentRow['chanNo'])
       },
       // 获取数据列表alert((data.list[1])['chanNo'])
       getDataList (val) {
