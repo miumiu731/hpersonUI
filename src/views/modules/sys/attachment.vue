@@ -23,6 +23,7 @@
       //<el-table-column @cell-click="test ()"
       //  prop="chanNo"
       //  header-align="center"
+      //  align="left"
       //  width="111"
       //  label="频道编码">
       //</el-table-column>
@@ -161,7 +162,7 @@
       },
       handleCurrentChange (val) {
         this.currentRow = val
-        alert(this.currentRow['chanNo'])
+//        alert(this.currentRow['chanNo'])
       },
       // 获取数据列表alert((data.list[1])['chanNo'])
       getDataList (val) {
@@ -195,8 +196,7 @@
         })
       },
       showImg (url) {
-        debugger
-        this.$alert(`<img src="http://106.12.16.45/${url}" width=600 height=500>`, '', {
+        this.$alert(`<img src="http://106.12.16.45/${url}" width=400 height=300>`, '', {
           dangerouslyUseHTMLString: true,
           confirmButtonText: '关闭',
           callback: action => {
