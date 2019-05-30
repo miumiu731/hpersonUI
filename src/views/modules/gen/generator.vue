@@ -59,6 +59,18 @@
         align="left"
         label="创建时间">
       </el-table-column>
+       <el-table-column
+        fixed="right"
+        header-align="center"
+        align="center"
+        width="150"
+        label="操作">
+        <template slot-scope="scope">
+          <el-button type="text" size="small"  @click="provideHandle(scope.row.tableName)">提供对外服务
+          </el-button>
+        
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       @size-change="sizeChangeHandle"
@@ -69,11 +81,17 @@
       :total="totalPage"
       layout="total, sizes, prev, pager, next, jumper">
     </el-pagination>
+     <!-- 对外接口列表 -->
+    <provide v-if="provideVisible" ref="provide"></provide>
   </div>
 </template>
 
 <script>
+import provide from './provide-api'
   export default {
+    components: {
+      provide
+    },
     data () {
       return {
         searchForm: {
@@ -82,6 +100,7 @@
           packageName: 'com.hperson.modules',
           author: '徐琛'
         },
+        provideVisible:false,
         dataList: [],
         pageIndex: 1,
         pageSize: 10,
@@ -133,6 +152,13 @@
       },
       selectionChangeHandle (val) {
         this.dataListSelections = val
+      },
+      //提供对外服务接口
+      provideHandle (tableName) {
+        this.provideVisible = true
+        this.$nextTick(() => {
+          this.$refs.provide.init(tableName)
+        })
       },
       // 每页数
       sizeChangeHandle (val) {

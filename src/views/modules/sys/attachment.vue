@@ -13,8 +13,8 @@
     </el-form>
 
 
-
-    <el-table
+<el-tree :data="channelDataList" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+    <!-- <el-table
       :data="channelDataList"
       border
       row-key="chanNo"
@@ -22,14 +22,14 @@
       highlight-current-row
       @current-change="getDataList"
       >
-      //<el-table-column @cell-click="test ()"
+      <!-- //<el-table-column @cell-click="test ()"
       //  prop="chanNo"
       //  header-align="center"
       //  align="left"
       //  width="111"
       //  label="频道编码">
-      //</el-table-column>
-      <table-tree-column
+      //</el-table-column> -->
+      <!-- <table-tree-column
         type="index"
         prop="chanName"
         header-align="center"
@@ -38,7 +38,8 @@
         width="111"
         label="频道名称"
         >
-      </table-tree-column>
+      </table-tree-column> -->
+
 
     </el-table>
 
@@ -194,6 +195,10 @@
         imagesArray:[
           {src:'',index:1}
         ],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        },
         isshow:false
       }
     },
@@ -209,19 +214,23 @@
     methods: {
     // 获取数据列表//,
       getChannelDataList () {
+        var that = this;
         this.$http({
-          url: '/sys/channel/queryAll',
+          url: '/sys/channel/tree',
           method: 'get',
           params: {
-
           }
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.channelDataList = this.treeDataTranslate(data.list, 'chanNo', 'parentNo', 'childrens')
+            that.channelDataList = data.tree;
+          console.log(that.channelDataList)
           } else {
-            this.channelDataList = []
+            that.channelDataList = []
           }
         })
+      },
+      handleNodeClick(data){
+        console.log(data);
       },
       handleCurrentChange (val) {
         this.currentRow = val

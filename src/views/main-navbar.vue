@@ -17,12 +17,12 @@
       <el-menu
         class="site-navbar__menu site-navbar__menu--right"
         mode="horizontal">
-        <el-menu-item index="1">
+        <!-- <el-menu-item index="1">
           <el-badge value="hot">
             <a href="#" target="_blank">官方社区</a>
           </el-badge>
-        </el-menu-item>
-        <el-menu-item index="2" @click="$router.push({ name: 'theme' })">
+        </el-menu-item> -->
+        <el-menu-item index="1" @click="$router.push({ name: 'theme' })">
           <template slot="title">
             <el-badge is-dot value="new">
               <icon-svg name="xitongpeizhi" class="el-icon-setting"></icon-svg>
