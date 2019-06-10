@@ -24,8 +24,14 @@
       @selection-change="selectionChangeHandle"
       height="460"
       style="width: 100%;">
+       style="width: 100%;">
       <el-table-column
        type="selection"
+        header-align="center"
+        align="center"
+        label="全选">
+      </el-table-column>
+      <el-table-column
         prop="columnName"
         header-align="center"
         align="center"
@@ -63,6 +69,7 @@
           packageName: 'com.hperson.provide',
           author: '徐琛'
         },
+        tableName: "",
         dataList: [],
         dataListSelections: []
       }
@@ -70,10 +77,12 @@
     methods: {
       init (tableName) {
         this.visible = true
+        this.tableName = tableName;
         this.getTableList(tableName)
       },
       //生成代码
       generator: function () {
+        debugger
         if (!this.dataListSelections.length) {
           this.$message({
             message: '请选择要生成的字段',
@@ -88,9 +97,9 @@
         }
         let columns = this.dataListSelections.map(item => {
             console.log("item",item);
-            return item.columnName
+            return item.columnName;
         })
-        location.href = this.$http.BASE_URL + `/sys/generator/codeByProvide?tables=${tables}&columns=${columns}&projectName=${this.searchForm.projectName}&packageName=${this.searchForm.packageName}&author=${this.searchForm.author}&token=${this.$cookie.get('token')}`
+        location.href = this.$http.BASE_URL + `/sys/generator/codeByProvide?tables=${this.tableName}&columns=${columns}&projectName=${this.searchForm.projectName}&packageName=${this.searchForm.packageName}&author=${this.searchForm.author}&token=${this.$cookie.get('token')}`
       },
       //勾选
       selectionChangeHandle (val) {
